@@ -37,6 +37,16 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -109,13 +119,163 @@ Copyright (c) 2024--present SKY-TKP
 
 \newpage
 
+\subsubsection{Summary some
+distribution}\label{summary-some-distribution}
+
+Discrete Probability Distribution
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1657}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0888}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.4024}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1006}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2426}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Distribution}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Parameter}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Probability mass function; PMF}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Expected Value}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Variance}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Uniform & \(a, b\) & \(\frac{1}{b - a + 1}\) & \(\frac{a+b}{2}\) &
+\(\frac{(b-a+1)^2-1}{12}\) \\
+Binomial & \(n, p\) & \(\binom{n}{k}p^k\ (1-p)^k\) & \(np\) & \(npq\) \\
+Poisson & \(\lambda\) & \(\frac{e^{-\lambda}{\lambda}^x}{x!}\) &
+\(\lambda\) & \(\lambda\) \\
+Geometric & \(p\) & \((1-p)^{k-1}p\) & \(\frac{1}{p}\) &
+\(\frac{1-p}{p^2}\) \\
+Hypergeometric & \(M, N, n\) &
+\(\frac{{M \choose k} {N-M \choose n-k}}{{N \choose n}}\) &
+\(n \frac{M}{N}\) &
+\(n \frac{M}{N} \left(1-\frac{M}{N}\right) \frac{N-n}{N-1}\) \\
+Negative Binomial & \(r, p\) & \({k-1 \choose r-1} p^r (1-p)^{k-r}\) &
+\(\frac{r}{p}\) & \(\frac{r(1-p)}{p^2}\) \\
+\end{longtable}
+
+Continuous Probability Distribution
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1380}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.5354}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0875}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1919}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0471}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Distribution}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Probability density function; PDF}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Expected Value}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Variance}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Note}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Uniform & \(\frac{1}{b - a}\) & \(\frac{a+b}{2}\) &
+\(\frac{(b-a)^2}{12}\) & - \\
+Normal &
+\(\frac{1}{\sigma\sqrt{2\pi}}e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{\!2}}\)
+& \(\mu\) & \(\sigma\) & - \\
+Z (Standard Normal) & \(\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^{\!2}}\) &
+0 & 1 & - \\
+Exponential & \({\lambda}{e^{-{\lambda}x}}\) & \(\frac{1}{\lambda}\) &
+\(\frac{1}{\lambda^2}\) & - \\
+Erlang & \(\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!}\) &
+\(\frac{k}{\lambda}\) & \(\frac{k}{\lambda^2}\) & \\
+Chi-squared & \(\frac{1}{2^{n/2}\Gamma(n/2)}x^{(n/2)-1}e^{-x/2}\) &
+\(n\) & \(2n\) & \(df\) \\
+Student's T &
+\(\frac{\Gamma((n+1)/2)}{\sqrt{\pi n}\,\Gamma(n/2)}\left(1+\frac{t^2}{n}\right)^{-\frac{n+1}{2}}\)
+& 0 & \(\frac{n}{n-2}\) & \(df\) \\
+F-distribution &
+\(\frac{\Gamma((n_1+n_2)/2)}{\Gamma(n_1/2)\Gamma(n_2/2)}\left(\frac{n_1}{n_2}\right)^{n_1/2}x^{(n_1/2)-1}\left(1+\frac{n_1}{n_2}x\right)^{-\frac{n_1+n_2}{2}}\)
+& \(\frac{n_2}{n_2 - 2}\) &
+\(\frac{2n_2^2(n_1 + n_2 - 2)}{n_1(n_2 - 2)^2(n_2 - 4)}\) &
+\(df_1, df_2\) \\
+Gamma &
+\(\frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma(\alpha)}\)
+& \(\frac{\alpha}{\lambda}\) & \(\frac{\alpha}{\lambda^2}\) & - \\
+\end{longtable}
+
+\newpage
+
+\subsubsection{Summary some distribution -
+cont.}\label{summary-some-distribution---cont.}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2778}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2778}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Distribution}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Notation}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Domain}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Moment Generating Function; MGF}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Discrete Distributions} & & & \\
+Uniform discrete & \(Uniform(a, b)\) & \(\{a, a+1, ..., b\}\) &
+\(\frac{e^{at}-e^{bt}}{t(b-a)}\) \\
+Binomial & \(Bin(n, p)\) & \(\{0, 1, 2, ..., n\}\) & \((pe^t + q)^n\), q
+= 1-p \\
+Poisson & \(Poi(\lambda)\) & \(\{0, 1, 2, ...\}\) &
+\(e^{\lambda(e^t-1)}\) \\
+Geometric & \(Geo(p)\) & \(\{1, 2, 3, ...\}\) & \(\frac{pe^t}{1-qe^t}\),
+q = 1-p \\
+Hypergeometric & \(Hyper(M,N,k)\) & \(\{0, 1, 2, ..., min(K, n)\}\) &
+- \\
+Negative binomial & \(NB(r, p)\) & \(\{0, 1, 2, ...\}\) &
+\((\frac{pe^t}{1-qe^t})^r\), q = 1-p \\
+\textbf{Continuous Distributions} & & & \\
+Uniform continuous & \(Uniform(a, b)\) & \([a, b]\) &
+\(\frac{e^{bt}-e^{at}}{t(b-a)}\) \\
+Normal & \(Normal(\mu, \sigma^2)\) & \((-\infty, \infty)\) &
+\(e^{{\mu}t + \frac{1}{2}\sigma^2t^2}\) \\
+Z (Standard Normal) & \(Z(0, 1)\) & \((-\infty, \infty)\) &
+\(e^{\frac{1}{2}t^2}\) \\
+Exponential & \(Expo(\lambda)\) & \([0, \infty)\) &
+\(\frac{\lambda}{\lambda-t}\), t \textless{} \(\lambda\) \\
+Erlang & Er(\(k,\ \lambda\)) & \([0, \infty)\) and \(k = 0, 1, 2, ..\) &
+\((\frac{\lambda}{\lambda-t})^k\), t \textless{} \(\lambda\) \\
+Chi-squared & \(\chi^2(n)\) & \([0, \infty)\) &
+\((1-2t)^{-\frac{n-1}{2}}\), t \textless{} \(\frac{1}{2}\) \\
+Student's t & \(T(n)\) & \((-\infty, \infty)\) & - \\
+F-distribution & \(F(n_1, n_2)\) & \([0, \infty)\) & - \\
+Gamma & \(Gamma(\alpha,\ \lambda)\) & \([0, \infty)\) &
+\((1-\beta t)^{-\alpha}\), t \textless{}\(\frac{1}{\beta}\) \\
+\end{longtable}
+
+\newpage
+
 \subsubsection{Table 1: Cumulative probabilities of the standard normal
 distribution.}\label{table-1-cumulative-probabilities-of-the-standard-normal-distribution.}
 
-Each table entry is the area \(A=1-\alpha\) under the standard normal
-curve from \(-\infty\) to \(z(\alpha)\). That is, the entries are
-\(\int_{-\infty}^{z(\alpha)}f_Z(z) \, dz = A = 1-\alpha\), where \(f_Z\)
-is the pdf of \(Z\sim \text{N}(0,1)\).
+Each table entry is the area \(\alpha\) under the standard normal curve
+from \(-\infty\) to \(z(\alpha)\). That is, the entries are
+\(\int_{-\infty}^{z(\alpha)}f_Z(z) \, dz = \alpha\), where \(f_Z\) is
+the pdf of \(Z\sim \text{N}(0,1)\).
 
 \vspace{1em}
 
@@ -675,7 +835,7 @@ Area & 11 & 12 & 13 & 14 & 15 & 20 & 30 & 60 & 120 & Infinity\\
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{10}{c}{$k_1$} \\
 \cmidrule(l{3pt}r{3pt}){2-11}
-\$alpha\$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+Area & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{11}{l}{\textbf{$k_2=20$}}\\
@@ -734,7 +894,7 @@ Area & 11 & 12 & 13 & 14 & 15 & 20 & 30 & 60 & 120 & Infinity\\
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{10}{c}{$k_1$} \\
 \cmidrule(l{3pt}r{3pt}){2-11}
-\$alpha\$ & 11 & 12 & 13 & 14 & 15 & 20 & 30 & 60 & 120 & Infinity\\
+Area & 11 & 12 & 13 & 14 & 15 & 20 & 30 & 60 & 120 & Infinity\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{11}{l}{\textbf{$k_2=20$}}\\
@@ -1092,7 +1252,8 @@ k & 3.5 & 4 & 4.5 & 5 & 5.5 & 6 & 6.5 & 7 & 7.5 & 8 & 8.5 & 9 & 9.5 & 10\\
 
 \newpage
 
-\#\#\#Table 6.3: (Continued) Poisson Probabilities.
+\subsubsection{Table 6.3: (Continued) Poisson
+Probabilities.}\label{table-6.3-continued-poisson-probabilities.}
 
 \begin{table}[!h]
 \centering\centering

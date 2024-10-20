@@ -52,10 +52,60 @@ Copyright (c) 2024--present SKY-TKP
 \end{center}
 
 \newpage
+### Summary some distribution 
+Discrete Probability Distribution
+
+| **Distribution**  | **Parameter** |                 **Probability mass function; PMF**                 |     **Expected Value**    |                        **Variance**                        |
+|----------------------------|:-------------:|:------------------------------------------------------------------:|:---------------:|:---------------------------------------:|
+| Uniform           |     $a, b$    | $\frac{1}{b - a + 1}$                    | $\frac{a+b}{2}$ |                  $\frac{(b-a+1)^2-1}{12}$                  |
+| Binomial          |     $n, p$    | $\binom{n}{k}p^k\ (1-p)^k$                               |       $np$      |                            $npq$                           |
+| Poisson           |   $\lambda$   | $\frac{e^{-\lambda}{\lambda}^x}{x!}$                     |    $\lambda$    |                          $\lambda$                         |
+| Geometric         |      $p$      | $(1-p)^{k-1}p$                                          |  $\frac{1}{p}$  |                      $\frac{1-p}{p^2}$                     |
+| Hypergeometric    |   $M, N, n$   | $\frac{{M \choose k} {N-M \choose n-k}}{{N \choose n}}$ | $n \frac{M}{N}$ | $n \frac{M}{N} \left(1-\frac{M}{N}\right) \frac{N-n}{N-1}$ |
+| Negative Binomial |     $r, p$    | ${k-1 \choose r-1} p^r (1-p)^{k-r}$                     | $\frac{r}{p}$   |                    $\frac{r(1-p)}{p^2}$                    |
+
+Continuous Probability Distribution
+
+| **Distribution** | **Probability density function; PDF**                                                                                                                         | **Expected Value**       | **Variance**                                            | **Note**     |
+|-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------:|:-------------------------------------------------------:|:------------:|
+| Uniform          | $\frac{1}{b - a}$                                                                                                                                             | $\frac{a+b}{2}$          | $\frac{(b-a)^2}{12}$                                    | -            |
+| Normal           | $\frac{1}{\sigma\sqrt{2\pi}}e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{\!2}}$                                                          | $\mu$                    | $\sigma$                                                | -            |
+| Z (Standard Normal)              | $\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^{\!2}}$                                                                                                | 0                        | 1                                                       | -            |
+| Exponential      | ${\lambda}{e^{-{\lambda}x}}$                                                                                                                         | $\frac{1}{\lambda}$      | $\frac{1}{\lambda^2}$                                   | -            |
+| Erlang          | $\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!}$                                                                            | $\frac{k}{\lambda}$      | $\frac{k}{\lambda^2}$                                   |              |
+| Chi-squared         | $\frac{1}{2^{n/2}\Gamma(n/2)}x^{(n/2)-1}e^{-x/2}$                                                                                                             | $n$                      | $2n$                                                    | $df$         |
+| Student's T              | $\frac{\Gamma((n+1)/2)}{\sqrt{\pi n}\,\Gamma(n/2)}\left(1+\frac{t^2}{n}\right)^{-\frac{n+1}{2}}$                                                              | 0                        | $\frac{n}{n-2}$                                         | $df$         |
+| F-distribution              | $\frac{\Gamma((n_1+n_2)/2)}{\Gamma(n_1/2)\Gamma(n_2/2)}\left(\frac{n_1}{n_2}\right)^{n_1/2}x^{(n_1/2)-1}\left(1+\frac{n_1}{n_2}x\right)^{-\frac{n_1+n_2}{2}}$ | $\frac{n_2}{n_2 - 2}$    | $\frac{2n_2^2(n_1 + n_2 - 2)}{n_1(n_2 - 2)^2(n_2 - 4)}$ | $df_1, df_2$ |
+| Gamma          | $\frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma(\alpha)}$                                                                                       | $\frac{\alpha}{\lambda}$ | $\frac{\alpha}{\lambda^2}$                              | -            |
+\newpage
+### Summary some distribution - cont.
+
+| **Distribution** | **Notation** | **Domain** | **Moment Generating Function; MGF** |
+|-----|---|-----|:---:|
+| **Discrete Distributions** |  |  |
+| Uniform discrete | $Uniform(a, b)$| $\{a, a+1, ..., b\}$ |$\frac{e^{at}-e^{bt}}{t(b-a)}$ |
+| Binomial | $Bin(n, p)$ | $\{0, 1, 2, ..., n\}$ | $(pe^t + q)^n$, q = 1-p |
+| Poisson | $Poi(\lambda)$ | $\{0, 1, 2, ...\}$ | $e^{\lambda(e^t-1)}$ |
+| Geometric | $Geo(p)$ | $\{1, 2, 3, ...\}$ | $\frac{pe^t}{1-qe^t}$, q = 1-p |
+| Hypergeometric | $Hyper(M,N,k)$ | $\{0, 1, 2, ..., min(K, n)\}$ | - |
+| Negative binomial | $NB(r, p)$ | $\{0, 1, 2, ...\}$ |$(\frac{pe^t}{1-qe^t})^r$, q = 1-p |
+| **Continuous Distributions** |  |  |
+| Uniform continuous | $Uniform(a, b)$ | $[a, b]$ | $\frac{e^{bt}-e^{at}}{t(b-a)}$ |
+| Normal | $Normal(\mu, \sigma^2)$ | $(-\infty, \infty)$ | $e^{{\mu}t + \frac{1}{2}\sigma^2t^2}$ |
+| Z (Standard Normal) |  $Z(0, 1)$ |$(-\infty, \infty)$ | $e^{\frac{1}{2}t^2}$ |
+| Exponential | $Expo(\lambda)$ |$[0, \infty)$ | $\frac{\lambda}{\lambda-t}$, t < $\lambda$ |
+| Erlang | Er($k,\ \lambda$) |$[0, \infty)$ and $k = 0, 1, 2, ..$ | $(\frac{\lambda}{\lambda-t})^k$, t < $\lambda$ |
+| Chi-squared | $\chi^2(n)$ | $[0, \infty)$ | $(1-2t)^{-\frac{n-1}{2}}$, t < $\frac{1}{2}$ |
+| Student's t | $T(n)$ |$(-\infty, \infty)$ | - |
+| F-distribution | $F(n_1, n_2)$|$[0, \infty)$ | - | |
+| Gamma | $Gamma(\alpha,\ \lambda)$| $[0, \infty)$ | $(1-\beta t)^{-\alpha}$, t <$\frac{1}{\beta}$ 
+
+
+\newpage
 ### Table 1: Cumulative probabilities of the standard normal distribution.
 
-Each table entry is the area $A=1-\alpha$ under the standard normal curve from $-\infty$ to $z(\alpha)$.
-That is, the entries are $\int_{-\infty}^{z(\alpha)}f_Z(z) \, dz = A = 1-\alpha$, where $f_Z$ is the pdf of $Z\sim \text{N}(0,1)$.
+Each table entry is the area $\alpha$ under the standard normal curve from $-\infty$ to $z(\alpha)$.
+That is, the entries are $\int_{-\infty}^{z(\alpha)}f_Z(z) \, dz = \alpha$, where $f_Z$ is the pdf of $Z\sim \text{N}(0,1)$.
 
 \vspace{1em}
 
@@ -65,16 +115,16 @@ y <- dnorm(x)
 dat <- tibble(x, y)
 ggplot(dat, aes(x, y)) +
   geom_line() +
-  geom_ribbon(data = subset(dat , x >= -3 & x <= 0.8), aes(ymax = y),
+  geom_ribbon(data = subset(dat , x >= -3 & x <= -0.4), aes(ymax = y),
               ymin = 0, fill = iprior::gg_col_hue(1), colour = NA,
               alpha = 0.5) +
-  geom_line(data = tibble(xx = c(0.8, 0.8), yy = c(0, dnorm(0.8))),
+  geom_line(data = tibble(xx = c(-0.4, -0.4), yy = c(0, dnorm(0.4))),
             aes(xx, yy), linetype = "dashed") +
   # annotate("text", x = -0.25, y = 0.17, size = 5, 
   #          label = expression("A ="~P (Z<z[alpha]) )  ) +
-  annotate("text", x = -0.25, y = 0.17, size = 8, label = expression(alpha)) +
+  annotate("text", x = -0.85, y = 0.17, size = 8, label = expression(alpha)) +
   labs(x = NULL, y = NULL) +
-  scale_x_continuous(breaks = 0.8, labels = expression(z(alpha))) +
+  scale_x_continuous(breaks = -0.4, labels = expression(z(alpha))) +
   theme_classic() +
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.text.x = element_text(size = 20))
@@ -591,7 +641,7 @@ m[29, ] <- iprior::dec_plac(tmp[29, ], 3)
 m[30:35, ] <- iprior::dec_plac(tmp[30:35, ], 3)
 
 colnames(m) <- k1
-m <- cbind("$alpha$" = rep(as.character(u_format), length(k2)), m)
+m <- cbind("Area" = rep(as.character(u_format), length(k2)), m)
 
 kable(m, booktabs = TRUE, row.names = FALSE, escape = FALSE,
       align = c("l", rep("r", length(k1)))) %>%
@@ -646,7 +696,7 @@ m[31:35, ] <- iprior::dec_plac(tmp[31:35, ], 4)
 
 colnames(m) <- k1
 colnames(m)[10] <- "Infinity"
-m <- cbind("$alpha$" = rep(as.character(u_format), length(k2)), m)
+m <- cbind("Area" = rep(as.character(u_format), length(k2)), m)
 
 kable(m, booktabs = TRUE, row.names = FALSE, escape = FALSE,
       align = c("l", rep("r", length(k1)))) %>%
@@ -849,7 +899,7 @@ cumulative_poisson_table %>%
 ```
 
 \newpage
-###Table 6.3: (Continued) Poisson Probabilities.
+### Table 6.3: (Continued) Poisson Probabilities.
 
 ```{r poitab3}
 # กำหนดค่า k และ μ
