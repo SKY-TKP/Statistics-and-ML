@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = FALSE, cache = TRUE, fig.path = "figure/",
 \vspace{2cm}
 {\Huge Statistical Tables}
 ~\\~\\
-v1.00 (last updated: 20 Oct 2024)
+v1.00 (last updated: 27 Nov 2024)
 \vspace{5cm}
 \end{center}
 
@@ -56,7 +56,7 @@ Copyright (c) 2024--present SKY-TKP
 Discrete Probability Distribution
 
 | **Distribution**  | **Parameter** |                 **Probability mass function; PMF**                 |     **Expected Value**    |                        **Variance**                        |
-|----------------------------|:-------------:|:------------------------------------------------------------------:|:---------------:|:---------------------------------------:|
+|-----------------------------|:-------------:|:------------------------------------------------------------------:|:---------------:|:---------------------------------------:|
 | Uniform           |     $a, b$    | $\frac{1}{b - a + 1}$                    | $\frac{a+b}{2}$ |                  $\frac{(b-a+1)^2-1}{12}$                  |
 | Binomial          |     $n, p$    | $\binom{n}{k}p^k\ (1-p)^k$                               |       $np$      |                            $npq$                           |
 | Poisson           |   $\lambda$   | $\frac{e^{-\lambda}{\lambda}^x}{x!}$                     |    $\lambda$    |                          $\lambda$                         |
@@ -66,17 +66,22 @@ Discrete Probability Distribution
 
 Continuous Probability Distribution
 
-| **Distribution** | **Probability density function; PDF**                                                                                                                         | **Expected Value**       | **Variance**                                            | **Note**     |
-|-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------:|:-------------------------------------------------------:|:------------:|
+| **Distribution** | **Probability density function; PDF**                                                                                                                         | **Expected Value**       | **Variance**                                            | **Note****     |
+|------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------:|:-------------------------------------------------------:|:------------:|
 | Uniform          | $\frac{1}{b - a}$                                                                                                                                             | $\frac{a+b}{2}$          | $\frac{(b-a)^2}{12}$                                    | -            |
 | Normal           | $\frac{1}{\sigma\sqrt{2\pi}}e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{\!2}}$                                                          | $\mu$                    | $\sigma$                                                | -            |
-| Z (Standard Normal)              | $\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^{\!2}}$                                                                                                | 0                        | 1                                                       | -            |
+| Z (S.M)*              | $\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}z^{\!2}}$                                                                                                | 0                        | 1                                                       | -            |
 | Exponential      | ${\lambda}{e^{-{\lambda}x}}$                                                                                                                         | $\frac{1}{\lambda}$      | $\frac{1}{\lambda^2}$                                   | -            |
 | Erlang          | $\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!}$                                                                            | $\frac{k}{\lambda}$      | $\frac{k}{\lambda^2}$                                   |              |
 | Chi-squared         | $\frac{1}{2^{n/2}\Gamma(n/2)}x^{(n/2)-1}e^{-x/2}$                                                                                                             | $n$                      | $2n$                                                    | $df$         |
-| Student's T              | $\frac{\Gamma((n+1)/2)}{\sqrt{\pi n}\,\Gamma(n/2)}\left(1+\frac{t^2}{n}\right)^{-\frac{n+1}{2}}$                                                              | 0                        | $\frac{n}{n-2}$                                         | $df$         |
+| Student's $t$              | $\frac{\Gamma((n+1)/2)}{\sqrt{\pi n}\,\Gamma(n/2)}\left(1+\frac{t^2}{n}\right)^{-\frac{n+1}{2}}$                                                              | 0                        | $\frac{n}{n-2}$                                         | $df$         |
 | F-distribution              | $\frac{\Gamma((n_1+n_2)/2)}{\Gamma(n_1/2)\Gamma(n_2/2)}\left(\frac{n_1}{n_2}\right)^{n_1/2}x^{(n_1/2)-1}\left(1+\frac{n_1}{n_2}x\right)^{-\frac{n_1+n_2}{2}}$ | $\frac{n_2}{n_2 - 2}$    | $\frac{2n_2^2(n_1 + n_2 - 2)}{n_1(n_2 - 2)^2(n_2 - 4)}$ | $df_1, df_2$ |
 | Gamma          | $\frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma(\alpha)}$                                                                                       | $\frac{\alpha}{\lambda}$ | $\frac{\alpha}{\lambda^2}$                              | -            |
+
+*$S.M: Standard \ Normal \ Distribution$
+
+**$df = n - 1$
+
 \newpage
 ### Summary some distribution - cont.
 
@@ -84,19 +89,19 @@ Continuous Probability Distribution
 |-----|---|-----|:---:|
 | **Discrete Distributions** |  |  |
 | Uniform discrete | $Uniform(a, b)$| $\{a, a+1, ..., b\}$ |$\frac{e^{at}-e^{bt}}{t(b-a)}$ |
-| Binomial | $Bin(n, p)$ | $\{0, 1, 2, ..., n\}$ | $(pe^t + q)^n$, q = 1-p |
+| Binomial | $Bin(n, p)$ | $\{0, 1, 2, ..., n\}$ | $(pe^t + q)^n$, $q = 1-p$ |
 | Poisson | $Poi(\lambda)$ | $\{0, 1, 2, ...\}$ | $e^{\lambda(e^t-1)}$ |
-| Geometric | $Geo(p)$ | $\{1, 2, 3, ...\}$ | $\frac{pe^t}{1-qe^t}$, q = 1-p |
-| Hypergeometric | $Hyper(M,N,k)$ | $\{0, 1, 2, ..., min(K, n)\}$ | - |
-| Negative binomial | $NB(r, p)$ | $\{0, 1, 2, ...\}$ |$(\frac{pe^t}{1-qe^t})^r$, q = 1-p |
+| Geometric | $Geo(p)$ | $\{1, 2, 3, ...\}$ | $\frac{pe^t}{1-qe^t}$, $q = 1-p$ |
+| Hypergeometric | $Hyper(M,N,n)$ | $\{0, 1, 2, ..., min(M, n)\}$ | - |
+| Negative binomial | $NB(r, p)$ | $\{0, 1, 2, ...\}$ |$(\frac{pe^t}{1-qe^t})^r$, $q = 1-p$ |
 | **Continuous Distributions** |  |  |
 | Uniform continuous | $Uniform(a, b)$ | $[a, b]$ | $\frac{e^{bt}-e^{at}}{t(b-a)}$ |
 | Normal | $Normal(\mu, \sigma^2)$ | $(-\infty, \infty)$ | $e^{{\mu}t + \frac{1}{2}\sigma^2t^2}$ |
 | Z (Standard Normal) |  $Z(0, 1)$ |$(-\infty, \infty)$ | $e^{\frac{1}{2}t^2}$ |
 | Exponential | $Expo(\lambda)$ |$[0, \infty)$ | $\frac{\lambda}{\lambda-t}$, t < $\lambda$ |
-| Erlang | Er($k,\ \lambda$) |$[0, \infty)$ and $k = 0, 1, 2, ..$ | $(\frac{\lambda}{\lambda-t})^k$, t < $\lambda$ |
+| Erlang | $Er(k,\ \lambda)$ |$[0, \infty)$ and $k = 0, 1, 2, ..$ | $(\frac{\lambda}{\lambda-t})^k$, t < $\lambda$ |
 | Chi-squared | $\chi^2(n)$ | $[0, \infty)$ | $(1-2t)^{-\frac{n-1}{2}}$, t < $\frac{1}{2}$ |
-| Student's t | $T(n)$ |$(-\infty, \infty)$ | - |
+| Student's $t$ | $T(n)$ |$(-\infty, \infty)$ | - |
 | F-distribution | $F(n_1, n_2)$|$[0, \infty)$ | - | |
 | Gamma | $Gamma(\alpha,\ \lambda)$| $[0, \infty)$ | $(1-\beta t)^{-\alpha}$, t <$\frac{1}{\beta}$ 
 
@@ -133,16 +138,20 @@ ggplot(dat, aes(x, y)) +
 ```{r normtab}
 u <- seq(-3.49, 0 , by = 0.01)
 p <- pnorm(u)
-m <- data.frame(matrix(p, ncol = 10, byrow = TRUE))
+m <- matrix(p, ncol = 10, byrow = TRUE)  
+
+m <- m[, c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)]  
+
+m <- formatC(m, format = "f", digits = 4)  # จัดรูปแบบตัวเลข
+m <- data.frame(m)
 colnames(m) <- c(
   gsub("0.0", ".0", iprior::dec_plac(seq(0, 0.09, by = 0.01), 2))
 )
 rownames(m) <- c(
   iprior::dec_plac(seq(-3.4, 0, by = 0.1), 1)
 )
-m <- cbind(z = rownames(m), m)
+m <- cbind("$z$" = rownames(m), m)
 
-options(digits = 4)
 kable(m, booktabs = TRUE, row.names = FALSE, escape = FALSE) %>%
   kable_styling(position = "center")
 ```
