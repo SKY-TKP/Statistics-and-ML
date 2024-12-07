@@ -150,7 +150,7 @@ colnames(m) <- c(
 rownames(m) <- c(
   iprior::dec_plac(seq(-3.4, 0, by = 0.1), 1)
 )
-m <- cbind("$z$" = rownames(m), m)
+m <- cbind("z" = rownames(m), m)
 
 kable(m, booktabs = TRUE, row.names = FALSE, escape = FALSE) %>%
   kable_styling(position = "center")
@@ -720,9 +720,9 @@ kable(m, booktabs = TRUE, row.names = FALSE, escape = FALSE,
 ```
 
 \newpage
-### Table 5: Binomial probabilities
+### Table 5: Binomial probabilities (PMF).
 
-The entries in the binomial tables are $X\sim\text{Bin}(n,p)$ where $\Pr(X=k)= \binom{n}{k}p^k\ (1-p)^k\ \ ; k=0, 1, 2, .., n$.
+The entries in the binomial tables are $X\sim\text{Bin}(n,p)$ where $\Pr(X=k)= \binom{n}{k}p^k\ (1-p)^{n-k} \ \ ; k=0, 1, 2, .., n$.
 
 ```{r binomtab1}
 prob <- c(0.01, 0.05, seq(0.1, 0.9, by = 0.1), 0.95, 0.99)
@@ -824,12 +824,113 @@ kable(tab[, -1], booktabs = TRUE, row.names = FALSE, escape = FALSE, digits = 3,
   pack_rows(" ", 40, 44, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%  
   pack_rows(" ", 45, 45, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") 
 ```
+\newpage
+### Table 6: Cummulative Binomial probabilities.
+The entries in the binomial tables are $X\sim\text{Bin}(n,p)$ where $\Pr(X \leq k)= \sum_{x=0}^{k}\binom{n}{x}p^x\ (1-p)^{n-x} \ \ $.
 
+```{r, fig.height = 5, fig.width = 8,out.width = "10cm", warning = FALSE, fig.align = "center"}
+prob <- c(0.01, 0.05, seq(0.1, 0.9, by = 0.1), 0.95, 0.99)
+n <- 2:8
+nlist <- xlist <- list()
+for (i in seq_along(n)) {
+  xlist[[i]] <- 0:(n[i])
+  nlist[[i]] <- rep(n[i], length(xlist[[i]]))
+}
+
+tab <- data.frame(
+  n = unlist(nlist),
+  x = unlist(xlist)
+)
+for (i in seq_along(prob)) {
+  tab <- cbind(tab, pbinom(tab$x, tab$n, prob[i]))
+}
+colnames(tab) <- c("n", "k", prob)
+
+kable(tab[, -1], booktabs = TRUE, row.names = FALSE, escape = FALSE, digits = 3,
+      align = c("l", rep("r", length(prob)))) %>%
+  kable_styling(position = "center")  %>%
+  add_header_above(c(" ", "$p$" = length(prob)), escape = FALSE) %>%
+  pack_rows("$n=2$", 1, 3, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=3$", 4, 7, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=4$", 8, 12, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=5$", 13, 18, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=6$", 19, 25, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=7$", 26, 33, escape = FALSE, bold = FALSE) %>%
+  pack_rows("$n=8$", 34, 42, escape = FALSE, bold = FALSE)
+```
+```{r binomtab4}
+prob <- c(0.01, 0.05, seq(0.1, 0.9, by = 0.1), 0.95, 0.99)
+n <- 9:12
+nlist <- xlist <- list()
+for (i in seq_along(n)) {
+  xlist[[i]] <- 0:(n[i])
+  nlist[[i]] <- rep(n[i], length(xlist[[i]]))
+}
+
+tab <- data.frame(
+  n = unlist(nlist),
+  x = unlist(xlist)
+)
+for (i in seq_along(prob)) {
+  tab <- cbind(tab, pbinom(tab$x, tab$n, prob[i]))
+}
+colnames(tab) <- c("n", "k", prob)
+
+kable(tab[, -1], booktabs = TRUE, row.names = FALSE, escape = FALSE, digits = 3,
+      align = c("l", rep("r", length(prob)))) %>%
+  kable_styling(position = "center")  %>%
+  add_header_above(c(" ", "$p$" = length(prob)), escape = FALSE) %>%
+  pack_rows("$n=9$", 1, 5, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 6, 10, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows("$n=10$", 11, 15, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 16, 20, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 21, 21, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows("$n=11$", 22, 26, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 27, 31, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 32, 33, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%  
+  pack_rows("$n=12$", 34, 38, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 39, 43, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 44, 46, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") 
+```
+
+```{r binomtab5}
+prob <- c(0.01, 0.05, seq(0.1, 0.9, by = 0.1), 0.95, 0.99)
+n <- 13:15
+nlist <- xlist <- list()
+for (i in seq_along(n)) {
+  xlist[[i]] <- 0:(n[i])
+  nlist[[i]] <- rep(n[i], length(xlist[[i]]))
+}
+
+tab <- data.frame(
+  n = unlist(nlist),
+  x = unlist(xlist)
+)
+for (i in seq_along(prob)) {
+  tab <- cbind(tab, pbinom(tab$x, tab$n, prob[i]))
+}
+colnames(tab) <- c("n", "k", prob)
+
+kable(tab[, -1], booktabs = TRUE, row.names = FALSE, escape = FALSE, digits = 3,
+      align = c("l", rep("r", length(prob)))) %>%
+  kable_styling(position = "center")  %>%
+  add_header_above(c(" ", "$p$" = length(prob)), escape = FALSE) %>%
+  pack_rows("$n=13$", 1, 5, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 6, 10, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 11, 14, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows("$n=14$", 15, 19, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 20, 24, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 25, 29, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows("$n=15$", 30, 34, escape = FALSE, bold = FALSE) %>%
+  pack_rows(" ", 35, 39, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%
+  pack_rows(" ", 40, 44, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") %>%  
+  pack_rows(" ", 45, 45, escape = FALSE, bold = FALSE, latex_gap_space = "-.7em") 
+```
 
 \newpage
-### Table 6.1: Poisson Probabilities.
+### Table 7.1: Poisson Probabilities (PMF).
 
-The entries in the poisson tables are $X\sim\text{Poi}(\lambda)$ where $\Pr(X=k)= \frac{e^{-\lambda}{\lambda}^x}{x!}; k = 0, 1, 2, ..$.
+The entries in the poisson tables are $X\sim\text{Poi}(\lambda)$ where $\Pr(X=k)= \frac{e^{-\lambda}{\lambda}^k}{k!}; k = 0, 1, 2, ..$.
 
 ```{r, fig.height = 5, fig.width = 8,out.width = "10cm", warning = FALSE, fig.align = "center"}
 # Set the value of lambda
@@ -880,7 +981,7 @@ cumulative_poisson_table %>%
 
 
 \newpage
-### Table 6.2: (Continued) Poisson Probabilities.
+### Table 7.2: (Continued) Poisson Probabilities.
 
 ```{r poitab2}
 # กำหนดค่า k และ μ
@@ -908,7 +1009,7 @@ cumulative_poisson_table %>%
 ```
 
 \newpage
-### Table 6.3: (Continued) Poisson Probabilities.
+### Table 7.3: (Continued) Poisson Probabilities.
 
 ```{r poitab3}
 # กำหนดค่า k และ μ
@@ -934,16 +1035,112 @@ cumulative_poisson_table %>%
   add_header_above(c(" " = 1, "lambda" = length(mu_values))) %>%
   kable_styling(latex_options = "scale_down", position = "center")
 ```
+\newpage
+### Table 8.1: Cummulative Poisson Probabilities
 
+The entries in the poisson tables are $X\sim\text{Poi}(\lambda)$ where $\Pr(X \leq k)= \sum_{x=0}^{k} \frac{e^{-\lambda}{\lambda}^x}{x!}$.
 
+```{r, fig.height = 5, fig.width = 8,out.width = "10cm", warning = FALSE, fig.align = "center"}
+# Set the value of lambda
+lambda <- 10
 
+# Define the range of x values (number of events)
+x <- 0:20
 
+# Create a data frame with x and corresponding probabilities
+data <- data.frame(
+  x = x,
+  probability = ppois(x, lambda)
+)
 
+# Create the ggplot
+ggplot(data, aes(x = x, y = probability)) +
+  geom_bar(stat = "identity", fill = "skyblue", alpha = 0.7) +
+  labs(title = "Poisson Distribution (lambda = 10)", 
+       x = "Number of Events (k), k = 0, 1, 2, 3, ...", 
+       y = "Cummulative Probability, P(X <= k)") +
+  theme_minimal()
+```
 
+```{r poitab4}
+# กำหนดค่า k และ μ
+k_values <- 0:10  # ค่า k ที่ต้องการ (0 ถึง 10)
+mu_values <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.5, 2, 2.5, 3)
 
+# สร้างตารางเปล่าสำหรับเก็บผลลัพธ์
+cumulative_poisson_table <- expand.grid(k = k_values, mu = mu_values) %>%
+  mutate(prob = pmap_dbl(list(k, mu), ~ ppois(..1, lambda = ..2))) %>%
+  pivot_wider(names_from = mu, values_from = prob) %>%
+  arrange(k)
 
+# ปิด warnings และปัดค่าเป็นทศนิยม 3 ตำแหน่ง
+suppressWarnings({
+  cumulative_poisson_table <- cumulative_poisson_table %>%
+    mutate(across(where(is.numeric), \(x) round(x, 3)))
+})
 
+# แสดงผลตารางด้วย kable ที่รองรับ LaTeX
+cumulative_poisson_table %>%
+  kbl(format = "latex", booktabs = TRUE, align = "c") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "lambda" = length(mu_values))) %>%
+  kable_styling(latex_options = "scale_down", position = "center")
+```
 
+\newpage
+### Table 8.2: (Continued) Cummulative Poisson Probabilities.
+
+```{r poitab5}
+# กำหนดค่า k และ μ
+k_values <- 0:23  # ค่า k ที่ต้องการ (0 ถึง 10)
+mu_values <- c(3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10)
+
+# สร้างตารางเปล่าสำหรับเก็บผลลัพธ์
+cumulative_poisson_table <- expand.grid(k = k_values, mu = mu_values) %>%
+  mutate(prob = pmap_dbl(list(k, mu), ~ ppois(..1, lambda = ..2))) %>%
+  pivot_wider(names_from = mu, values_from = prob) %>%
+  arrange(k)
+
+# ปิด warnings และปัดค่าเป็นทศนิยม 3 ตำแหน่ง
+suppressWarnings({
+  cumulative_poisson_table <- cumulative_poisson_table %>%
+    mutate(across(where(is.numeric), \(x) round(x, 3)))
+})
+
+# แสดงผลตารางด้วย kable ที่รองรับ LaTeX
+cumulative_poisson_table %>%
+  kbl(format = "latex", booktabs = TRUE, align = "c") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "lambda" = length(mu_values))) %>%
+  kable_styling(latex_options = "scale_down", position = "center")
+```
+\newpage
+### Table 8.3: (Continued) Cummulative Poisson Probabilities.
+
+```{r poitab6}
+# กำหนดค่า k และ μ
+k_values <- 0:40  # ค่า k ที่ต้องการ (0 ถึง 10)
+mu_values <- c(11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30, 40, 50)
+
+# สร้างตารางเปล่าสำหรับเก็บผลลัพธ์
+cumulative_poisson_table <- expand.grid(k = k_values, mu = mu_values) %>%
+  mutate(prob = pmap_dbl(list(k, mu), ~ ppois(..1, lambda = ..2))) %>%
+  pivot_wider(names_from = mu, values_from = prob) %>%
+  arrange(k)
+
+# ปิด warnings และปัดค่าเป็นทศนิยม 3 ตำแหน่ง
+suppressWarnings({
+  cumulative_poisson_table <- cumulative_poisson_table %>%
+    mutate(across(where(is.numeric), \(x) round(x, 3)))
+})
+
+# แสดงผลตารางด้วย kable ที่รองรับ LaTeX
+cumulative_poisson_table %>%
+  kbl(format = "latex", booktabs = TRUE, align = "c") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), full_width = FALSE) %>%
+  add_header_above(c(" " = 1, "lambda" = length(mu_values))) %>%
+  kable_styling(latex_options = "scale_down", position = "center")
+```
 
 
 
