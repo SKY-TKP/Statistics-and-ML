@@ -22,9 +22,9 @@ Mathematics for Machine Learning and Data Science Specialization offered by deep
 <br/>
 
 ## Course 3 : [Probability & Statistics for Machine Learning & Data Science](https://www.coursera.org/learn/machine-learning-probability-and-statistics)
-### [Certificate Of Completion](https://coursera.org/share/10ba65d22dca9278c5119d7511bcec0b)
+### [Certificate Of Completion]((https://coursera.org/share/da0ac7fef8f7ceebcedc300feba835d3)
 
 
 <br/>
 
-## [Specialization Certificate](https://coursera.org/share/ea6107e80f98b4d1f05b9263413f39c6)
+## [Specialization Certificate](https://www.coursera.org/account/accomplishments/specialization/NLQ40IDVKZSE)
